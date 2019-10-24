@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_phone_name"
+        android:layout_width="match_parent"
+        android:text="向"
+        android:textColor="@color/colorgray"
+        android:gravity="center"
+        android:layout_height="60dp">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorgray"
+        android:layout_height="1dp" />
+    <TextView
+        android:id="@+id/tv_call_phone"
+        android:text="呼叫"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorgray"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/tv_copy_phone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="复制号码"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="#999999"
+        android:layout_height="1dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:background="#F1F1F1"
+        android:layout_height="10dp" />
+    <TextView
+        android:id="@+id/tv_cancle"
+        android:text="取消"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+    </TextView>
+
+</LinearLayout>

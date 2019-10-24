@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.laiyifen.capital"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        //versionName "2.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('/Users/jasmin/Desktop/zhouss/compass.jks')
+            storePassword '123456'
+        }
+
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [JPUSH_PKGNAME: defaultConfig.applicationId]
+            resValue "string", "app_name", "爱屋资本(测试)"
+           // buildConfigField('String','SERVER_URL','"http://10.0.14.13:9080/investbpm/"')
+         buildConfigField('String','SERVER_URL','"https://invest.laiyifen.com:8001/investbpm/"')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            applicationIdSuffix ".release"
+            resValue "string", "app_name", "爱屋资本"
+            manifestPlaceholders = [JPUSH_PKGNAME: defaultConfig.applicationId]
+            signingConfig signingConfigs.release
+            buildConfigField('String','SERVER_URL','"https://invest.laiyifen.com:8001/investbpm/"')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def fileName
+                    def date = releaseTime()
+                    fileName = "爱屋资本${date}_${variant.versionName}.apk"
+                    outputFileName = fileName
+                }
+            }
+        }
+    }
+}
+def releaseTime() {
+    return new Date().format("MM-dd-hh-mm", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+    implementation(name: 'lyfloginlibrary-release', ext: 'aar')
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //权限框架
+    implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.1.0"
+}
